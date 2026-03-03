@@ -81,6 +81,21 @@ const app = new Elysia()
     }
   )
 
+  .onAfterHandle(({ response }) => {
+    return {
+      success: true,
+      message: "data tersedia",
+      data: response
+    }
+  })
+
+  .get("/product", () => {
+    return {
+      id: 1,
+      name: "Laptop"
+    }
+  })
+
   .listen(3000);
 
 
