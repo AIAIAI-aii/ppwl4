@@ -41,23 +41,23 @@ const app = new Elysia()
     }
   )
 
-  .get(
-  "/stats",
-  () => {
-    return {
-      total: 100,
-      active: 80
-    };
-  },
-  {
-    response: {
-      200: t.Object({
-        total: t.Number(),
-        active: t.Number()
-      })
+    .get(
+    "/stats",
+    () => {
+      return {
+        total: 100,
+        active: 80
+      };
+    },
+    {
+      response: {
+        200: t.Object({
+          total: t.Number(),
+          active: t.Number()
+        })
+      }
     }
-  }
-)
+  )
 
   .listen(3000);
 
