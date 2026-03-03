@@ -59,6 +59,28 @@ const app = new Elysia()
     }
   )
 
+    .get(
+    "/admin",
+    () => {
+      return {
+        stats: 99
+      };
+    },
+    {
+      beforeHandle({ headers, set }) {
+        const auth = headers.authorization;
+
+        if (auth !== "Bearer 123") {
+          set.status = 401;
+          return {
+            success: false,
+            message: "Unauthorized"
+          };
+        }
+      }
+    }
+  )
+
   .listen(3000);
 
 
