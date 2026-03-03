@@ -18,6 +18,29 @@ const app = new Elysia()
       })
     }
   )
+
+  .get(
+    "/products/:id",
+    ({ params, query }) => {
+      return {
+        message: "Success",
+        id: params.id,
+        sort: query.sort
+      };
+    },
+    {
+      params: t.Object({
+        id: t.Numeric() 
+      }),
+      query: t.Object({
+        sort: t.Union([
+          t.Literal("asc"),
+          t.Literal("desc")
+        ])
+      })
+    }
+  )
+
   .listen(3000);
 
 
