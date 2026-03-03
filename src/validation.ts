@@ -96,6 +96,32 @@ const app = new Elysia()
     }
   })
 
+  .onError(({ code, set }) => {
+    if (code === "VALIDATION") {
+      set.status = 400
+      return {
+        success: false,
+        error: "Validation Error"
+      }
+    }
+  })
+
+  .post(
+    "/login",
+    ({ body }) => {
+      return {
+        success: true,
+        message: "Login berhasil"
+      }
+    },
+    {
+      body: t.Object({
+        email: t.String({ format: "email" }),
+        password: t.String({ minLength: 8 })
+      })
+    }
+  )
+
   .listen(3000);
 
 
